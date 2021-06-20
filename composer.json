@@ -1,0 +1,40 @@
+{
+    "name": "ilaravelpro/iorder",
+    "description": "iLaravel iOrder",
+    "keywords": [
+        "laravel",
+        "log",
+        "reports"
+    ],
+    "homepage": "https://ilaravel.iamir.net/packages/iorders",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "iamirnet",
+            "email": "me@iamir.net",
+            "homepage": "https://iamir.net",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "src"
+        ],
+        "psr-4": {
+            "iLaravel\\iOrder\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "iLaravel\\iOrder\\Providers\\AppServiceProvider",
+                "iLaravel\\iOrder\\Providers\\RouteServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
