@@ -27,6 +27,7 @@ class RouteServiceProvider extends ServiceProvider
     public function map(Router $router)
     {
         if (iorder('routes.api.status', true)) $this->apiRoutes($router);
+        if (iorder('routes.web.status', true)) $this->webRoutes($router);
     }
 
     public function apiRoutes(Router $router)
@@ -37,6 +38,17 @@ class RouteServiceProvider extends ServiceProvider
             'middleware' => 'api'
         ], function ($router) {
             require_once(iorder_path('routes/api.php'));
+        });
+    }
+
+    public function webRoutes(Router $router)
+    {
+        $router->group([
+            'namespace' => '\iLaravel\iOrder\iApp\Http\Controllers\WEB',
+            'prefix' => '',
+            'middleware' => 'web'
+        ], function ($router) {
+            require_once(iorder_path('routes/web.php'));
         });
     }
 }

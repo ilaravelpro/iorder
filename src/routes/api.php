@@ -11,3 +11,4 @@ Route::namespace('v1')->prefix('v1')->middleware('auth:api')->group(function () 
     if (iorder('routes.api.orders.status')) Route::apiResource('orders', 'OrderController', ['as' => 'api']);
     if (iorder('routes.api.payments.status')) Route::apiResource('payments', 'PaymentController', ['as' => 'api']);
 });
+

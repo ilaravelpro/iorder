@@ -15,7 +15,23 @@ return [
                 'status' => true
             ],
             'payments' => [
-                'status' => true
+                'status' => true,
+            ]
+        ],
+        'web' => [
+            'status' => true,
+            'providers' => [
+                'payment' => [
+                    'test' => [
+                        'status' => true
+                    ]
+                ]
+            ],
+            'payments' => [
+                'status' => true,
+                'callback' => [
+                    'status' => true
+                ]
             ]
         ]
     ],
@@ -24,5 +40,14 @@ return [
             'include' => true
         ],
     ],
+    'payment' => [
+        'providers' => [
+            'testpay' => [
+                'name' => 'testpay',
+                'title' => 'Test Pay',
+                'model' => \iLaravel\iOrder\Vendor\Payment\Providers\TestPay::class
+            ],
+        ]
+    ]
 ];
 ?>

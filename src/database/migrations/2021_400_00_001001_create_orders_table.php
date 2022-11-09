@@ -24,12 +24,17 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('creator_id')->nullable()->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
+            $table->string('type')->nullable();
             $table->string('number')->nullable();
             $table->string('tax')->nullable();
             $table->string('shipping')->nullable();
             $table->string('wallet')->nullable();
             $table->string('discount')->nullable();
             $table->string('cost')->nullable();
+            $table->string('wage')->nullable();
+            $table->string('pay')->nullable();
             $table->string('currency')->nullable();
             $table->string('ip')->nullable();
             $table->string('status')->default('waiting');

@@ -24,17 +24,28 @@ class Order extends \iLaravel\Core\iApp\Model
         'payed_at' => 'timestamp'
     ];
 
+    public function getPayedAtAttribute($value)
+    {
+        return format_datetime($value, isset($this->datetime) ? $this->datetime : [], 'payed_at');
+    }
+
     protected static function boot()
     {
         parent::boot();
         parent::saving(function (self $event) {
-            if (isset($event->_ip) && $ipmodel = imodal('LocationIp')) {
-                if (!($event->ip = $ipmodel::findByIP($event->_ip))){
-                    $event->ip = $ipmodel::create(['ip' => $event->_ip]);
+            if (isset($event->_ip)) {
+                if ($ipmodel = imodal('LocationIp')){
+                    if (!($event->ip = $ipmodel::findByIP($event->_ip))){
+                        $event->ip = $ipmodel::create(['ip' => $event->_ip]);
+                    }
+                    $event->ip = $event->ip->id;
                 }
-                $event->ip = $event->ip->id;
+                $event->ip = $event->_ip;
             }
             unset($event->_ip);
+        });
+        static::deleting(function (self $event) {
+            $event->payments()->delete();
         });
     }
 
@@ -44,6 +55,6 @@ class Order extends \iLaravel\Core\iApp\Model
     }
 
     public function payments() {
-        return $this->belongsToMany(imodal('PaymentLog'), 'orders_payment_logs');
+        return $this->belongsToMany(imodal('PaymentLog'), 'order_payment_log');
     }
 }

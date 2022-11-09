@@ -33,7 +33,7 @@ class CreatePaymentLogsTable extends Migration
             $table->string('ip')->nullable();
             $table->longText('message')->nullable();
             $table->string('code')->nullable();
-            $table->string('status')->default('waiting');
+            $table->string('status')->default('processing');//'waiting'
             $table->timestamp('payed_at')->nullable();
             $table->timestamps();
         });

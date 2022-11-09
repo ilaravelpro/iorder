@@ -28,6 +28,7 @@ class PaymentController extends Controller
         Store,
         Update,
         Destroy,
+        Payment\Callback,
         Payment\RequestData,
         Payment\Filters;
 }

@@ -22,6 +22,11 @@ class Payment extends \iLaravel\Core\iApp\Model
 
     protected $hidden = ['metas'];
 
+    public function getTitleAttribute()
+    {
+        return $this->name;
+    }
+
     public function creator()
     {
         return $this->belongsTo(imodal('User'), 'creator_id', 'id');
@@ -48,5 +53,13 @@ class Payment extends \iLaravel\Core\iApp\Model
                 break;
         }
         return $rules;
+    }
+
+    public function provider($order) {
+        return new \iLaravel\iOrder\Vendor\Payment\Provider($this, $order);
+    }
+
+    public function getVendorAttribute() {
+        return $this->provider ? ipreference('iorder.payment.providers.' . $this->provider . '.model') : null;
     }
 }
